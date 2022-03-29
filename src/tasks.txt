@@ -1,0 +1,15 @@
+Recettes (Ismail)
+
+Voir toutes les recettes
+voir une recette en particulier
+Editer/Supprimer une recette
+Chercher une recette selon un nom
+
+Chercher une recette selon une liste d’ingrédient
+
+Ingrédients (Ewen)
+Créer un ingrédient avec des attributs (calories…)
+Ajouter un ingrédient à une recette
+
+Users (Najib)
+CRUD users
