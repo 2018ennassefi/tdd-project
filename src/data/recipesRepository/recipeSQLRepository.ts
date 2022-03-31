@@ -9,8 +9,9 @@ class RecipeSQLRepository implements RecipeRepository {
   constructor(db: Database<sqlite3.Database, sqlite3.Statement>) {
     this.sqliteDB = db;
     }
-    getCreatorRecipes(creator: string): Promise<any[]> {
-        throw new Error("Method not implemented.");
+    public async getCreatorRecipes(creator: string): Promise<any[]> {
+        const res = await this.sqliteDB.get('SELECT * FROM recipes WHERE creator=:creator',{':creator':creator});
+        return Array(res);
     }
     
     public async returnAll(): Promise<any[]> {
