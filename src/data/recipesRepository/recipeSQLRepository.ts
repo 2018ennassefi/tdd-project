@@ -12,7 +12,8 @@ class RecipeSQLRepository implements RecipeRepository {
 
     
   public async createRecipe(r: RecipeEntity): Promise<void> {
-      await this.sqliteDB.run('INSERT INTO "recipes"(id, name, ingredients, creator) VALUES (:id, :name, :ingredients , :creator)');
+      await this.sqliteDB.run('INSERT INTO "recipes"(id, name, ingredients, creator) VALUES (:id, :name, :ingredients , :creator)',
+          { ':id':r.id,':name':r.name,':ingredients':r.ingredients,':creator':r.creator});
   }
 }
 
