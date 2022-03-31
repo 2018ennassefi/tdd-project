@@ -46,12 +46,13 @@ describe("Testing recipes ", () => {
     expect(recipes[0].ingredients).toBe(ingredients)
     expect(recipes[0].creator).toBe(creatorId)
     });
+
+
     it("should return all recipes of a creator given his id", async () => {
-    const recipeName = "My first Recipe"
-    const ingredients = "Carrots,Eggs"
     const creatorId = '5'
     const recipes = await recipeService.getCreatorRecipes(creatorId);
     expect(recipes[0].creator).toBe(creatorId)
     })
+
 
 });
