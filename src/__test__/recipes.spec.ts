@@ -54,5 +54,10 @@ describe("Testing recipes ", () => {
     expect(recipes[0].creator).toBe(creatorId)
     })
 
+    it('should return a recipe given its name', async () => {
+        const recipeName = "My first Recipe"
+        const recipe = await recipeService.getRecipeByName(recipeName);
+        expect(recipe.name).toBe(recipeName)
+    })
 
 });
