@@ -1,21 +1,29 @@
-import { open } from "sqlite";
+import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
 import UserRepository from "src/data/usersRepository/userRepository";
 import UserSQLRepository from "src/data/usersRepository/userSQLRepository";
 import UserDomainService from "src/services/users/userDomainService";
+import { createUsersTable, dropUsersTable } from "src/utils/sql-scripts";
 
 let userService: UserDomainService;
 let userRepository: UserRepository;
+let db: Database<sqlite3.Database, sqlite3.Statement>;
 
 describe("Testing user resource", () => {
   beforeAll(async () => {
-    const db = await open({
+    db = await open({
       filename: './database.db',
       driver: sqlite3.Database
     });
 
+    await createUsersTable(db);
+
     userRepository = new UserSQLRepository(db);
     userService = new UserDomainService(userRepository);
+  });
+
+  afterAll(async () => {
+    await dropUsersTable(db);
   });
 
   it("should create a new user", async () => {
