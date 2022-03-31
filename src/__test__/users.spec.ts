@@ -3,7 +3,7 @@ import sqlite3 from "sqlite3";
 import UserRepository from "src/data/usersRepository/userRepository";
 import UserSQLRepository from "src/data/usersRepository/userSQLRepository";
 import UserDomainService from "src/services/users/userDomainService";
-import { createUsersTable, dropUsersTable } from "src/utils/sql-scripts";
+import { createUsersTable, clearUsersTable } from "src/utils/sql-scripts";
 
 let userService: UserDomainService;
 let userRepository: UserRepository;
@@ -23,7 +23,7 @@ describe("Testing user resource", () => {
   });
 
   afterAll(async () => {
-    await dropUsersTable(db);
+    await clearUsersTable(db);
   });
 
   it("should create a new user", async () => {

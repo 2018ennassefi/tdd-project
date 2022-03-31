@@ -23,6 +23,7 @@ class UserSQLRepository implements UserRepository {
 
     return res;
   }
+
   public async getByName(name: string): Promise<any> {
     const res = await this.sqliteDB.get('SELECT * FROM user WHERE username = :pseudo', { ':pseudo': name });
 
