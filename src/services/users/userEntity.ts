@@ -1,12 +1,10 @@
 class UserEntity {
   public id: string;
   public username: string;
-  public recipes: any[];
 
-  constructor(id: string, username: string, recipes?: any[]) {
+  constructor(id: string, username: string) {
     this.id = id;
     this.username = username;
-    this.recipes = recipes || [];
   }
 }
 

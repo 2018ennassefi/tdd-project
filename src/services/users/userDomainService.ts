@@ -9,10 +9,10 @@ class UserDomainService implements UserAbstarctService {
     this.userRepository = repo;
   }
 
-  createUser(): Promise<void> {
+  createUser(name: string): Promise<string> {
     throw new Error("Method not implemented.");
   }
-  removeUser(id: string): Promise<void> {
+  removeUser(id: string): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
   searchById(id: string): Promise<UserEntity> {
