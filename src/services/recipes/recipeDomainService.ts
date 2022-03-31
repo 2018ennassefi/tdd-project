@@ -1,0 +1,22 @@
+import RecipeRepository from "src/data/recipesRepository/recipeRepository";
+import RecipeAbstarctService from "src/services/recipes/recipeAbstractService";
+import RecipeEntity from "src/services/recipes/recipeEntity";
+import { v4 as uuidv4 } from 'uuid';
+
+class RecipeDomainService implements RecipeAbstarctService {
+  private readonly recipeRepository: RecipeRepository;
+
+  constructor(repo: RecipeRepository) {
+    this.recipeRepository = repo;
+  }
+
+  public async createRecipe(name: string, creator: string, ingredients: string[]): Promise<string> {
+      const id = uuidv4();
+    await this.recipeRepository.createRecipe(new RecipeEntity(id, ingredients, creator, name));
+
+    return id;
+  }
+
+}
+
+export default RecipeDomainService;
