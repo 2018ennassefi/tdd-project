@@ -9,6 +9,9 @@ class RecipeDomainService implements RecipeAbstarctService {
   constructor(repo: RecipeRepository) {
     this.recipeRepository = repo;
   }
+    getCreatorRecipes(creator: string): Promise<any[]> {
+        throw new Error("Method not implemented.");
+    }
 
   public async createRecipe(name: string, creator: string, ingredients: string[]): Promise<string> {
       const id = uuidv4();
