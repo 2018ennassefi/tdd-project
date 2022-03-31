@@ -1,3 +1,4 @@
+import { IM_A_TEAPOT } from "http-status";
 import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
 import RecipeRepository from "src/data/recipesRepository/recipeRepository";
@@ -40,11 +41,17 @@ describe("Testing recipes ", () => {
     const ingredients = "Carrots,Eggs"
     const creatorId = '5'
     const recipes = await recipeService.returnAll();
-    console.log(recipes);
     expect(recipes.length).toBe(1)
     expect(recipes[0].name).toBe(recipeName)
     expect(recipes[0].ingredients).toBe(ingredients)
     expect(recipes[0].creator).toBe(creatorId)
-  });
+    });
+    it("should return all recipes of a creator given his id", async () => {
+    const recipeName = "My first Recipe"
+    const ingredients = "Carrots,Eggs"
+    const creatorId = '5'
+    const recipes = await recipeService.getCreatorRecipes(creatorId);
+    expect(recipes[0].creator).toBe(creatorId)
+    })
 
 });
