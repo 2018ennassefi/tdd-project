@@ -10,8 +10,9 @@ class RecipeSQLRepository implements RecipeRepository {
     this.sqliteDB = db;
     }
     
-    returnAll(): Promise<RecipeEntity[]> {
-        throw new Error("Method not implemented.");
+    public async returnAll(): Promise<any[]> {
+        const res = await this.sqliteDB.get('SELECT * FROM recipes');
+        return Array(res);
     }
 
     

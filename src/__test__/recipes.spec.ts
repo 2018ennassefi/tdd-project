@@ -37,7 +37,7 @@ describe("Testing recipes ", () => {
     
     it("should return all recipes", async () => {
     const recipeName = "My first Recipe"
-    const ingredients = ['Carrots', 'Eggs']
+    const ingredients = "Carrots,Eggs"
     const creatorId = '5'
     const recipes = await recipeService.returnAll();
     console.log(recipes);

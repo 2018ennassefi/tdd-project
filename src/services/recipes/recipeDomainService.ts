@@ -17,6 +17,7 @@ class RecipeDomainService implements RecipeAbstarctService {
     }
 public async returnAll(): Promise<RecipeEntity[]> {
     const recipes = await this.recipeRepository.returnAll();
+    console.log(recipes)
     return recipes;
 }
 
