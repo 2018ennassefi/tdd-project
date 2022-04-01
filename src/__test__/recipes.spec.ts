@@ -95,5 +95,28 @@ afterAll(async () => {
     expect(response.statusCode).toBe(200)
     
   })
+
+  test("should return the new recipe on a post request to create one", (done) => {
+    const recipeName = "My first Recipe"
+    const ingredients = ['Carrots', 'Eggs']
+    const creatorId = '5'
+    
+    request(app).post("/api/recipe/").send({
+      'name': recipeName,
+      'ingredients': ingredients,
+      'creator':creatorId
+    }).expect(200)
+      .expect((res) => {
+        res.body.data.name = recipeName
+        res.body.data.ingredients = ingredients
+        res.body.data.creator = creatorId
+        res.body.data.id != ""
+      })
+      .end((err:any) => {
+        if (err) return done(err);
+      return done()}
+    )
+    
+  })
 })
 
