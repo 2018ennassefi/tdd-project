@@ -62,6 +62,18 @@ describe("Testing Ingredients ", () => {
     expect(ingredient).toBeUndefined();
   });
 
+  it("should be abdle to delete ingredient", async () => {
+    const ingredientName = "Carrot";
+    const category = "vegetable";
+    const calories = 5;
+    try {
+      const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
+      IngredientService.deleteIngredient(ingredientId);
+    } catch (error) {
+      expect(error).toBeFalsy();
+    }
+  });
+
 });
 
 
