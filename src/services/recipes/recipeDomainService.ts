@@ -9,24 +9,24 @@ class RecipeDomainService implements RecipeAbstarctService {
   constructor(repo: RecipeRepository) {
     this.recipeRepository = repo;
   }
-    public async getRecipeByName(name: string): Promise<RecipeEntity> {
-      const res = await this.recipeRepository.getRecipeByName(name);
-      return res
-    }
-    public async getCreatorRecipes(creator: string): Promise<any[]> {
-        const res = await this.recipeRepository.getCreatorRecipes(creator);
-        return res
-    }
+  public async getRecipeByName(name: string): Promise<RecipeEntity> {
+    const res = await this.recipeRepository.getRecipeByName(name);
+    return res;
+  }
+  public async getCreatorRecipes(creator: string): Promise<any[]> {
+    const res = await this.recipeRepository.getCreatorRecipes(creator);
+    return res;
+  }
 
   public async createRecipe(name: string, creator: string, ingredients: string[]): Promise<string> {
-      const id = uuidv4();
+    const id = uuidv4();
     await this.recipeRepository.createRecipe(new RecipeEntity(id, ingredients, creator, name));
     return id;
-    }
-public async returnAll(): Promise<RecipeEntity[]> {
+  }
+  public async returnAll(): Promise<RecipeEntity[]> {
     const recipes = await this.recipeRepository.returnAll();
     return recipes;
-}
+  }
 
 }
 
