@@ -9,6 +9,20 @@ class IngredientDomainService implements IngredientAbstarctService {
   constructor(repo: IngredientRepository) {
     this.ingredientRepository = repo;
   }
+
+  async deleteIngredient(carrotID: string): Promise<boolean> {
+    try {
+      await this.ingredientRepository.deleteIngredient(carrotID);
+      return Promise.resolve(true);
+    } catch (e) {
+      return Promise.resolve(false);
+    }
+  }
+
+  getByName(name: string):Promise<IngredientEntity|undefined> {
+    return this.ingredientRepository.getByName(name);
+  }
+  
   getById(id: string): Promise<IngredientEntity|undefined> {
     return this.ingredientRepository.getById(id);
   }
