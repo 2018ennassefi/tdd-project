@@ -4,6 +4,7 @@ import IngredientRepository from "src/data/ingredientsRepository/ingredientRepos
 import IngredientSQLRepository from "src/data/ingredientsRepository/ingredientSQLRepository";
 import IngredientDomainService from "src/services/ingredients/ingredientDomainService";
 import { createIngredientsTable, clearIngredientsTable } from "src/utils/sql-scripts";
+import { v4 as uuid4 } from "uuid";
 
 let IngredientService: IngredientDomainService;
 let IngredientRepository: IngredientRepository;
@@ -47,13 +48,22 @@ describe("Testing Ingredients ", () => {
     try {
       const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
       const ingredient = await IngredientService.getById(ingredientId);
-      expect(ingredient.name).toBe(ingredientName);
-      expect(ingredient.category).toBe(category);
-      expect(ingredient.calories).toBe(calories);
+      expect(ingredient?.name).toBe(ingredientName);
+      expect(ingredient?.category).toBe(category);
+      expect(ingredient?.calories).toBe(calories);
     } catch (error) {
       console.log(error);
       expect(error).toBeFalsy();
     }
   });
 
+  it("should return undefined if ingredient not found by id", async () => {
+    const someId = uuid4();
+    const ingredient = await IngredientService.getById(someId);
+
+    expect(ingredient).toBeUndefined();
+  });
+
 });
+
+
