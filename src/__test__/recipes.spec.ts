@@ -1,4 +1,3 @@
-import { IM_A_TEAPOT } from "http-status";
 import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
 import RecipeRepository from "src/data/recipesRepository/recipeRepository";
@@ -6,6 +5,8 @@ import RecipeSQLRepository from "src/data/recipesRepository/recipeSQLRepository"
 import RecipeDomainService from "src/services/recipes/recipeDomainService";
 import RecipeEntity from "src/services/recipes/recipeEntity";
 import { createRecipesTable, clearRecipesTable } from "src/utils/sql-scripts";
+import request from "supertest"
+import app from 'src/app'
 
 let recipeService: RecipeDomainService;
 let recipeRepository: RecipeRepository;
@@ -61,3 +62,37 @@ describe("Testing recipes ", () => {
     })
 
 });
+
+describe("POST /api/recipes", () => {
+
+describe("when sending a request to the recipes api", () => {
+  beforeAll(async () => {
+  db = await open({
+    filename: './database.db',
+    driver: sqlite3.Database
+  });
+
+  await createRecipesTable(db);
+
+  recipeRepository = new RecipeSQLRepository(db);
+  recipeService = new RecipeDomainService(recipeRepository);
+});
+
+afterAll(async () => {
+  await clearRecipesTable(db);
+});
+    
+  test("should respond with a 200 status code", async () => {
+    const recipeName = "My first Recipe"
+    const ingredients = ['Carrots', 'Eggs']
+    const creatorId = '5'
+    const response = await request(app).post("/api/recipes").send({ 
+      name: recipeName, 
+      ingredients: ingredients,
+      creator: creatorId
+    })
+    expect(response.statusCode).toBe(200)
+  })
+})
+
+})
