@@ -22,8 +22,12 @@ class IngredientSQLRepository implements IngredientRepository {
     return undefined;
   }
 
-  getByName(name: string): Promise<any> {
-    throw new Error("Method not implemented.");
+  async getByName(name: string): Promise<IngredientEntity | undefined> {
+    const res = await this.sqliteDB.get('SELECT * FROM ingredients WHERE name=:name', { ':name': name });
+    if (res) {
+      return new IngredientEntity(res.id, res.name, res.category, res.calories);
+    }
+    return undefined;
   }
 
   async createIngredient(i: IngredientEntity): Promise<void> {
