@@ -12,8 +12,9 @@ class IngredientSQLRepository implements IngredientRepository {
   deleteIngredient(id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  getById(id: string): Promise<any> {
-    throw new Error("Method not implemented.");
+  async getById(id: string): Promise<any> {
+    const res = await this.sqliteDB.get('SELECT * FROM ingredients WHERE id=:id',{':id':id});
+    return new IngredientEntity(res.id, res.name, res.category, res.calories);
   }
   getByName(name: string): Promise<any> {
     throw new Error("Method not implemented.");

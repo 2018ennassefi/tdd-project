@@ -10,7 +10,7 @@ class IngredientDomainService implements IngredientAbstarctService {
     this.ingredientRepository = repo;
   }
   getById(id: string): Promise<IngredientEntity> {
-    throw new Error("Method not implemented.");
+    return this.ingredientRepository.getById(id);
   }
 
   public async createIngredient(name: string, category:string, calories:number): Promise<string> {
