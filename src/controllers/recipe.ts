@@ -24,16 +24,16 @@ class RecipeRouter {
     this._router.post(
       '/',
       async (req: Request, res: Response) => {
-          const recipeId = await this.service.createRecipe(String(req.body.name),String(req.body.creator),Array(req.body.ingredients));
+        const recipeId = await this.service.createRecipe(String(req.body.name),String(req.body.creator),Array(req.body.ingredients));
         res.send({ recipeId });
       }
-      );
+    );
     this._router.get(
-    '/',
-    async (req: Request, res: Response) => {
-    res.sendStatus(200);
-    }
-);
+      '/',
+      async (req: Request, res: Response) => {
+        res.sendStatus(200);
+      }
+    );
   }
 }
 
