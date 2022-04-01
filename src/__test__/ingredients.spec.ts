@@ -40,4 +40,20 @@ describe("Testing Ingredients ", () => {
 
   });
 
+  it("should get a ingredient by its id", async () => {
+    const ingredientName = "Carrot";
+    const category = "vegetable";
+    const calories = 5;
+    try {
+      const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
+      const ingredient = await IngredientService.getById(ingredientId);
+      expect(ingredient.name).toBe(ingredientName);
+      expect(ingredient.category).toBe(category);
+      expect(ingredient.calories).toBe(calories);
+    } catch (error) {
+      console.log(error);
+      expect(error).toBeFalsy();
+    }
+  });
+
 });
