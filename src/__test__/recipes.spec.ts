@@ -73,7 +73,7 @@ describe("when sending a request to the recipes api", () => {
   });
   
   await createRecipesTable(db);
-  app = createApp()
+  app = createApp(db)
   recipeRepository = new RecipeSQLRepository(db);
   recipeService = new RecipeDomainService(recipeRepository);
 });
@@ -107,10 +107,9 @@ afterAll(async () => {
       'creator':creatorId
     }).expect(200)
       .expect((res) => {
-        res.body.data.name = recipeName
-        res.body.data.ingredients = ingredients
-        res.body.data.creator = creatorId
-        res.body.data.id != ""
+        console.log('body',res.body)
+        console.log("data",res.body.recipeId)
+        res.body.recipeId != ""
       })
       .end((err:any) => {
         if (err) return done(err);
