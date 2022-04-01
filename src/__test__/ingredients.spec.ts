@@ -28,11 +28,16 @@ describe("Testing Ingredients ", () => {
 
   it("should create a Ingredient", async () => {
     const ingredientName = "Carrot";
-    const category = "Carrot";
+    const category = "vegetable";
     const calories = 5;
-    const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
+    try {
+      const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
+      expect(ingredientId).toBeTruthy();
+    } catch (error) {
+      console.log(error);
+      expect(error).toBeFalsy();
+    }
 
-    expect(ingredientId).toBeTruthy();
   });
 
 });

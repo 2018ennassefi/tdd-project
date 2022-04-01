@@ -1,6 +1,6 @@
 import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
-import { createRecipesTable, createUsersTable } from "src/utils/sql-scripts";
+import { createIngredientsTable, createRecipesTable, createUsersTable } from "src/utils/sql-scripts";
 
 export const connectSQLite = async (filename: string): Promise<Database<sqlite3.Database, sqlite3.Statement>> => {
   const db = await open({
@@ -14,7 +14,8 @@ export const connectSQLite = async (filename: string): Promise<Database<sqlite3.
 export const createTables = async (db: Database<sqlite3.Database, sqlite3.Statement>): Promise<void> => {
   await Promise.all([
     createUsersTable(db),
-    createRecipesTable(db)
+    createRecipesTable(db),
+    createIngredientsTable(db)
   ]);
 };
 

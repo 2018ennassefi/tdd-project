@@ -17,7 +17,7 @@ export const clearRecipesTable = async (db: Database<sqlite3.Database, sqlite3.S
 };
 
 export const createIngredientsTable = async (db: Database<sqlite3.Database, sqlite3.Statement>) => {
-  await db.exec('CREATE TABLE IF NOT EXISTS ingredients (id varchar, name varchar, category varchar, calories int)');
+  await db.exec('CREATE TABLE IF NOT EXISTS ingredients (id varchar, name varchar, category varchar, calories number)');
 };
 export const clearIngredientsTable = async (db: Database<sqlite3.Database, sqlite3.Statement>) => {
   await db.run('DELETE FROM ingredients');
