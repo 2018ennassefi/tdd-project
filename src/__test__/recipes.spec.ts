@@ -63,7 +63,6 @@ describe("Testing recipes ", () => {
 
 });
 
-describe("POST /api/recipes", () => {
 
 describe("when sending a request to the recipes api", () => {
   beforeAll(async () => {
@@ -86,13 +85,12 @@ afterAll(async () => {
     const recipeName = "My first Recipe"
     const ingredients = ['Carrots', 'Eggs']
     const creatorId = '5'
-    const response = await request(app).post("/api/recipes").send({ 
+    request(app).post("/api/recipe/").send({ 
       name: recipeName, 
       ingredients: ingredients,
       creator: creatorId
-    })
-    expect(response.statusCode).toBe(200)
+    }).expect(response.statusCode).toBe(200)
+    
   })
 })
 
-})
