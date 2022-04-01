@@ -1,17 +1,14 @@
 import { Router } from "express";
-import UserController from "src/controllers/users/controller";
-import UserRouter from "src/controllers/users/router";
-import UserSQLRepository from "src/data/usersRepository/userSQLRepository";
-import UserDomainService from "src/services/users/userDomainService";
-import { connectSQLite, createTables } from "src/utils/sqlite-connect";
+import { Database } from "sqlite";
+import sqlite3 from "sqlite3";
+import UserRouter from "src/controllers/users";
 
-const baseRouter = Router();
+const baseRouter = (db: Database<sqlite3.Database, sqlite3.Statement>): Router => {
+  const router = Router();
 
-connectSQLite('main-database.sql').then(async (db) => {
-  await createTables(db);
+  router.use('/users', new UserRouter(db).build());
 
-  const c = new UserController(new UserDomainService(new UserSQLRepository(db)));
-  baseRouter.use('/users', new UserRouter(c).build());
-});
+  return router;
+};
 
 export default baseRouter;
