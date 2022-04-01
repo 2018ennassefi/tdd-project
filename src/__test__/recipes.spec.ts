@@ -6,7 +6,7 @@ import RecipeDomainService from "src/services/recipes/recipeDomainService";
 import RecipeEntity from "src/services/recipes/recipeEntity";
 import { createRecipesTable, clearRecipesTable } from "src/utils/sql-scripts";
 import request from "supertest"
-import app from 'src/app'
+import createApp from 'src/app'
 
 let recipeService: RecipeDomainService;
 let recipeRepository: RecipeRepository;
@@ -65,14 +65,15 @@ describe("Testing recipes ", () => {
 
 
 describe("when sending a request to the recipes api", () => {
+  let app: any
   beforeAll(async () => {
   db = await open({
     filename: './database.db',
     driver: sqlite3.Database
   });
-
+  
   await createRecipesTable(db);
-
+  app = createApp()
   recipeRepository = new RecipeSQLRepository(db);
   recipeService = new RecipeDomainService(recipeRepository);
 });
@@ -85,11 +86,13 @@ afterAll(async () => {
     const recipeName = "My first Recipe"
     const ingredients = ['Carrots', 'Eggs']
     const creatorId = '5'
-    request(app).post("/api/recipe/").send({ 
-      name: recipeName, 
-      ingredients: ingredients,
-      creator: creatorId
-    }).expect(response.statusCode).toBe(200)
+    
+    const response = await request(app).post("/api/recipe/").send({
+      'name': recipeName,
+      'ingredients': ingredients,
+      'creator':creatorId
+    })
+    expect(response.statusCode).toBe(200)
     
   })
 })
