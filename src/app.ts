@@ -2,7 +2,6 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import baseRouter from "src/routes";
-
 function createApp(): express.Express {
   const app = express();
 
