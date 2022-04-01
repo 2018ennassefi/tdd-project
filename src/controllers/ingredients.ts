@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 const recipeRouter = Router()
 
 recipeRouter.post('/', (req: Request, res: Response) => {
-    console.log('req',req)
     res.sendStatus(200)
 })
 
