@@ -35,7 +35,6 @@ describe("Testing Ingredients ", () => {
       const ingredientId = await IngredientService.createIngredient(ingredientName, category, calories);
       expect(ingredientId).toBeTruthy();
     } catch (error) {
-      console.log(error);
       expect(error).toBeFalsy();
     }
 
@@ -52,7 +51,6 @@ describe("Testing Ingredients ", () => {
       expect(ingredient?.category).toBe(category);
       expect(ingredient?.calories).toBe(calories);
     } catch (error) {
-      console.log(error);
       expect(error).toBeFalsy();
     }
   });

@@ -12,22 +12,24 @@ class IngredientSQLRepository implements IngredientRepository {
   deleteIngredient(id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  async getById(id: string): Promise<IngredientEntity|undefined> {
-    const res = await this.sqliteDB.get('SELECT * FROM ingredients WHERE id=:id',{':id':id});
-    if (res) { 
+  async getById(id: string): Promise<IngredientEntity | undefined> {
+    const res = await this.sqliteDB.get('SELECT * FROM ingredients WHERE id=:id', { ':id': id });
+    if (res) {
       return new IngredientEntity(res.id, res.name, res.category, res.calories);
 
+    }
+    return undefined;
   }
-return undefined}
+
   getByName(name: string): Promise<any> {
     throw new Error("Method not implemented.");
   }
-    
+
   async createIngredient(i: IngredientEntity): Promise<void> {
     await this.sqliteDB.run('INSERT INTO "ingredients" (id, name, category, calories) VALUES (:id, :name, :category , :calories)',
-        { ':id':i.id,':name':i.name,':category':i.category,':calories':i.calories});
+      { ':id': i.id, ':name': i.name, ':category': i.category, ':calories': i.calories });
   }
-    
+
 }
 
 export default IngredientSQLRepository;
