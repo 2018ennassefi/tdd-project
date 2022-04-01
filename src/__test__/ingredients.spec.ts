@@ -55,10 +55,30 @@ describe("Testing Ingredients ", () => {
     }
   });
 
+  it("should get a ingredient by its name", async () => {
+    const ingredientName = "Carrot";
+    const category = "vegetable";
+    const calories = 5;
+    try {
+      await IngredientService.createIngredient(ingredientName, category, calories);
+      const ingredient = await IngredientService.getByName("Carrot");
+      expect(ingredient?.name).toBe(ingredientName);
+      expect(ingredient?.category).toBe(category);
+      expect(ingredient?.calories).toBe(calories);
+    } catch (error) {
+      expect(error).toBeFalsy();
+    }
+  });
+
   it("should return undefined if ingredient not found by id", async () => {
     const someId = uuid4();
     const ingredient = await IngredientService.getById(someId);
 
+    expect(ingredient).toBeUndefined();
+  });
+
+  it("should return undefined if ingredient not found by name", async () => {
+    const ingredient = await IngredientService.getByName("patates");
     expect(ingredient).toBeUndefined();
   });
 
