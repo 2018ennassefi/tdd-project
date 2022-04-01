@@ -4,6 +4,12 @@ import IngredientEntity from "src/services/ingredients/ingredientEntity";
 import { v4 as uuidv4 } from 'uuid';
 
 class IngredientDomainService implements IngredientAbstarctService {
+  private readonly ingredientRepository: IngredientRepository;
+
+  constructor(repo: IngredientRepository) {
+    this.ingredientRepository = repo;
+  }
+
   async deleteIngredient(carrotID: string): Promise<boolean> {
     try {
       await this.ingredientRepository.deleteIngredient(carrotID);
@@ -12,11 +18,11 @@ class IngredientDomainService implements IngredientAbstarctService {
       return Promise.resolve(false);
     }
   }
-  private readonly ingredientRepository: IngredientRepository;
 
-  constructor(repo: IngredientRepository) {
-    this.ingredientRepository = repo;
+  getByName(name: string):Promise<IngredientEntity|undefined> {
+    return this.ingredientRepository.getByName(name);
   }
+  
   getById(id: string): Promise<IngredientEntity|undefined> {
     return this.ingredientRepository.getById(id);
   }
