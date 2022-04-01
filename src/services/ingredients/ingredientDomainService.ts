@@ -9,7 +9,7 @@ class IngredientDomainService implements IngredientAbstarctService {
   constructor(repo: IngredientRepository) {
     this.ingredientRepository = repo;
   }
-  getById(id: string): Promise<IngredientEntity> {
+  getById(id: string): Promise<IngredientEntity|undefined> {
     return this.ingredientRepository.getById(id);
   }
 
