@@ -9,9 +9,10 @@ class IngredientSQLRepository implements IngredientRepository {
   constructor(db: Database<sqlite3.Database, sqlite3.Statement>) {
     this.sqliteDB = db;
   }
-  deleteIngredient(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteIngredient(id: string): Promise<void> {
+    await this.sqliteDB.run('DELETE FROM ingredients WHERE id=:id', { ':id': id });
   }
+
   async getById(id: string): Promise<IngredientEntity | undefined> {
     const res = await this.sqliteDB.get('SELECT * FROM ingredients WHERE id=:id', { ':id': id });
     if (res) {

@@ -4,6 +4,14 @@ import IngredientEntity from "src/services/ingredients/ingredientEntity";
 import { v4 as uuidv4 } from 'uuid';
 
 class IngredientDomainService implements IngredientAbstarctService {
+  async deleteIngredient(carrotID: string): Promise<boolean> {
+    try {
+      await this.ingredientRepository.deleteIngredient(carrotID);
+      return Promise.resolve(true);
+    } catch (e) {
+      return Promise.resolve(false);
+    }
+  }
   private readonly ingredientRepository: IngredientRepository;
 
   constructor(repo: IngredientRepository) {
