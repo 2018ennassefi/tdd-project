@@ -23,14 +23,18 @@ class UserDomainService implements UserAbstarctService {
     return true;
   }
 
-  public async searchById(id: string): Promise<UserEntity> {
+  public async searchById(id: string): Promise<UserEntity | undefined> {
     const sqlUser = await this.userRepository.getById(id);
+
+    if (!sqlUser) { return undefined; }
 
     return new UserEntity(String(sqlUser.id), String(sqlUser.username));
   }
 
-  public async searchByPseudo(pseudo: string): Promise<UserEntity> {
+  public async searchByPseudo(pseudo: string): Promise<UserEntity | undefined> {
     const sqlUser = await this.userRepository.getByName(pseudo);
+
+    if (!sqlUser) { return undefined; }
 
     return new UserEntity(String(sqlUser.id), String(sqlUser.username));
   }
